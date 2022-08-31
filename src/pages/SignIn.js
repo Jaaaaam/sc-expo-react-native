@@ -1,8 +1,9 @@
 import {useState} from "react";
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { login } from "../api/AuthService";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const SignIn = () => {
+const SignIn = ({setToken, setAccount, navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,6 +12,7 @@ const SignIn = () => {
     console.log(password, 'password')
     login({email, password, role:'customer'}).then((res) => {
       console.log(res, 'success')
+      navigation.navigate('Home')
     }).catch(err => {
       console.log(err, 'err1232');
     });
