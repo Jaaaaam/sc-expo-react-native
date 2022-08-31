@@ -1,9 +1,11 @@
 import {useState} from "react";
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { login } from "../api/AuthService";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useDispatch } from 'react-redux';
+import { setAccount } from "../reducers/authReducer";
 
-const SignIn = ({setToken, setAccount, navigation}) => {
+const SignIn = ({navigation}) => {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,6 +14,7 @@ const SignIn = ({setToken, setAccount, navigation}) => {
     console.log(password, 'password')
     login({email, password, role:'customer'}).then((res) => {
       console.log(res, 'success')
+      dispatch(setAccount(res.data))
       navigation.navigate('Home')
     }).catch(err => {
       console.log(err, 'err1232');
