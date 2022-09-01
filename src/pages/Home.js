@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 const Home = () => {
   const account = useSelector(state => state.auth.account);
   console.log(account, 'CHECK ACCOUNT')
-  return <View styles={styles.container}>
+  return <View style={styles.container}>
     <Text>This is the home screen</Text>
   </View>
 }
@@ -13,7 +13,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f7f7f7',
     alignItems: 'center',
     justifyContent: 'center',
   },

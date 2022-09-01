@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { Text, View, Button } from 'react-native';
 import { registerRootComponent } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -14,26 +13,38 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="SignIn" component={SignIn} />
-          <Stack.Screen
-            name="Home"
-            component={Home}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="SignIn"
+          component={SignIn}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerStyle: {
+              backgroundColor: '#f7f7f7',
+              border: 'none'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerRight: () => (
+              <Button
+                onPress={() => alert('This is a button!')}
+                title="Info"
+                color="#fff"
+              />
+            ),
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default registerRootComponent(App)
